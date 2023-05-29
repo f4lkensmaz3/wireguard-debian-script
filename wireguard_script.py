@@ -36,8 +36,8 @@ def main():
     os.system('ufw allow 51194/udp')
 
     # -- INSTALL ENCRYPTED DNS
-    os.system('wget https://github.com/AdguardTeam/dnsproxy/releases/download/v0.46.5/dnsproxy-linux-amd64-v0.46.5.tar.gz -P /tmp/')    # DOWNLOAD ADGUARD DNSPROXY
-    os.system('tar -xf /tmp/dnsproxy-linux-amd64-v0.46.5.tar.gz -C /tmp/ && mv /tmp/linux-amd64/dnsproxy /usr/sbin/ && rm -r /tmp/dnsproxy-linux-amd64-v0.46.5.tar.gz /tmp/linux-amd64') # INSTALL DNSPROXY
+    os.system('wget https://github.com/AdguardTeam/dnsproxy/releases/download/v0.49.1/dnsproxy-linux-amd64-v0.49.1.tar.gz -P /tmp/')    # DOWNLOAD ADGUARD DNSPROXY
+    os.system('tar -xf /tmp/dnsproxy-linux-amd64-v0.49.1.tar.gz -C /tmp/ && mv /tmp/linux-amd64/dnsproxy /usr/sbin/ && rm -r /tmp/dnsproxy-linux-amd64-v0.49.1.tar.gz /tmp/linux-amd64') # INSTALL DNSPROXY
 
     with open ('/etc/systemd/system/ad-dnsproxy.service','w+') as f: # CREATE A SERVICE FILE
         f.write("[Unit]\nDescription=ad-dnsproxy\nAfter=network.target\n\n[Service]\nExecStart=/usr/sbin/dnsproxy -u 'https://dns.quad9.net/dns-query' -b 9.9.9.9\nType=simple\nRestart=always\n\n[Install]\nWantedBy=default.target\nRequiredBy=network.target")
